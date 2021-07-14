@@ -1,0 +1,5 @@
+{
+    "type": "NoStateScopeRedirectURI",
+    "title": "The state parameter, a CSRF token, the scope, typically just \"read_api\", and the redirect_uri, a URI to any page of your website that can proceed with the authentication, must be provided."
+  }
+  

@@ -1,0 +1,4 @@
+{
+  "type": "NoAuthenticationForSession",
+  "title": "You first need to authenticate by going to $host/authenticate, with $host being this domain."
+}

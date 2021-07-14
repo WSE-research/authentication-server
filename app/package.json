@@ -1,0 +1,48 @@
+{
+  "name": "auth-server",
+  "version": "1.0.0",
+  "description": "An application that allows users to authorize at GitLab and receive a JWT containing all the necessary data.",
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.hs-anhalt.de:zwischenprojekte/authentication-server.git"
+  },
+  "main": "build/server.js",
+  "scripts": {
+    "test": "echo 'nope'",
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "node .",
+    "setupdb": "([[ -d $DATA/postgres-data ]] && docker run -d --name $POSTGRES_DB -p 40981:5432 -v ./postgres-data/:/var/lib/postgresql/data -e 'POSTGRES_PASSWORD=$TOURNAMENT_DB_PW' postgres) || (mkdir ./postgres-data && docker run -d --name $POSTGRES_DB -p 40981:5432 -v $DATA/postgres-data/:/var/lib/postgresql/data -e 'POSTGRES_PASSWORD=$TOURNAMENT_DB_PW' postgres)",
+    "initdb": "ts-node tools/initdb",
+    "git-ignore-dir": "lua tools/git-ignore.lua ignoreDirectory",
+    "git-ignore-file": "lua tools/git-ignore.lua ignoreFile",
+    "dev:start": "npm-run-all build start",
+    "dev": "nodemon --watch app -e ts,ejs --exec npm run dev:start"
+  },
+  "author": "Jonas Wunsch (Wutras)",
+  "license": "SEE LICENSE IN <LICENSE>",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.6.0",
+    "pg-promise": "^10.10.2",
+    "pkce-challenge": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.12",
+    "@types/fs-extra": "^9.0.11",
+    "@types/jsonwebtoken": "^8.5.4",
+    "@types/node": "^15.12.2",
+    "@types/pg": "^8.6.0",
+    "fs-extra": "^10.0.0",
+    "nodemon": "^2.0.7",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^10.0.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.3.2"
+  }
+}
