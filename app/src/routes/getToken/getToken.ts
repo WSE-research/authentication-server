@@ -31,7 +31,9 @@ export default async (req: any, res: any, privKey: string) => {
     );
 
     if (!!authToken) {
-      res.status(200).send(authToken);
+      res.status(200).json({
+        token: authToken,
+      });
     } else {
       res.status(401).json(ErrorResponses.NoAuthenticationForSession);
     }

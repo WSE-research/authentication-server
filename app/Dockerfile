@@ -16,6 +16,7 @@ COPY ./tools/initdb.ts ./src
 RUN npm run build
 
 COPY ./jwtRS256.key build
+COPY ./jwtRS256.key.pub build
 COPY ./tools/initdb.pgsql build
 
 EXPOSE 8081
