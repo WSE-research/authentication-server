@@ -19,7 +19,7 @@ export default async (req: any, res: any) => {
     await client.connect();
 
     await client.query(
-    "INSERT INTO auth_data (csrfToken, codeChallenge, codeVerifier, redirectURI) VALUES($1::text, $2::text, $3::text, 4::text) ON CONFLICT (csrfToken) DO UPDATE SET codeChallenge=$2::text, codeVerifier=$3::text, redirectURI=$4::text;",
+    "INSERT INTO auth_data (csrfToken, codeChallenge, codeVerifier, redirectURI) VALUES($1::text, $2::text, $3::text, $4::text) ON CONFLICT (csrfToken) DO UPDATE SET codeChallenge=$2::text, codeVerifier=$3::text, redirectURI=$4::text;",
     [
       params.state,
       code_challenge,
