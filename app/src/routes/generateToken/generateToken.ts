@@ -21,7 +21,7 @@ export default async (req: any, res: any) => {
         params.state,
       ])
     ).rows[0];
-    if (!authData || !authData.codeverifier) {
+    if (!authData?.codeverifier) {
       res.status(400).json(ErrorResponses.NoAuthenticationForSession);
       return;
     }
@@ -41,15 +41,22 @@ export default async (req: any, res: any) => {
       body
     );
     if (!tokenDataResponse?.data) {
-      res.send("Something went wrong. Please close the tab and try again.");
+      handleError(
+        req,
+        res,
+        `No data prop found in tokenDataResponse: ${JSON.stringify(
+          tokenDataResponse
+        )}`
+      );
       return;
     }
+    // TODO: Es gibt leider keinen Wert 'expires_in', weswegen nicht refresht werden kann.
+    // TODO: Der Fehler wurde schon gemeldet und sollte in Zukunft behoben werden.
+
     /*
-    Es gibt leider keinen Wert 'expires_in', weswegen nicht refresht werden kann.
-    
-    setInterval(() => {
+    setTimeout(() => {
         query("DELETE FROM auth_data WHERE state=$1::text;", [params.state]);
-    }, !!response.data.expires_in ? +response.data.expires_in : 7200);
+    }, !!response.data.expires_in ? +tokenDataResponse?.data?.expires_in : 7200);
     */
 
     const userDataResponse = await axios.get(
@@ -62,7 +69,13 @@ export default async (req: any, res: any) => {
     );
 
     if (!userDataResponse?.data) {
-      res.send("Something went wrong. Please close the tab and try again.");
+      handleError(
+        req,
+        res,
+        `No data prop found in userDataResponse: ${JSON.stringify(
+          userDataResponse
+        )}`
+      );
       return;
     }
 

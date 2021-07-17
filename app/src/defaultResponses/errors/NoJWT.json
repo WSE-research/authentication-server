@@ -1,0 +1,4 @@
+{
+  "type": "NoJWT",
+  "title": "You must provide a JWT in the \"Authorization\" header following the Bearer schema."
+}
