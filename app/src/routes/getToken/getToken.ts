@@ -32,7 +32,7 @@ export default async (req: any, res: any, privKey: string) => {
         username: authData.gitlabusername,
       },
       privKey,
-      { algorithm: "RS256", expiresIn: "120m" }
+      { algorithm: "RS256", expiresIn: "10m" }
     );
 
     if (!!authToken) {
