@@ -28,4 +28,4 @@ services:
         build:
             context: ./nginx
         ports:
-            - "443:443"
+            - "40980-40989:443"

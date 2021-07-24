@@ -80,8 +80,8 @@ export default async (req: any, res: any) => {
     }
 
     await client.query(
-      "UPDATE auth_data SET authToken=$1::json, gitlabUsername=$2::text WHERE csrfToken=$3::text;",
-      [tokenDataResponse.data, userDataResponse.data.username, params.state]
+      "UPDATE auth_data SET authToken=$1::text, gitlabUsername=$2::text WHERE csrfToken=$3::text;",
+      [tokenDataResponse.data.access_token, userDataResponse.data.username, params.state]
     );
 
     res.redirect(authData.redirecturi);
