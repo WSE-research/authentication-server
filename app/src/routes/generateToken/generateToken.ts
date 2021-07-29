@@ -26,7 +26,7 @@ export default async (req: any, res: any) => {
       return;
     }
 
-    const redirect_uri = `${req.protocol}://${req.get("host")}/generateToken`;
+    const redirect_uri = `https://${req.get("host")}/generateToken`;
     const body = {
       client_id: process.env.GITLAB_APP_ID,
       client_secret: process.env.GITLAB_CLIENT_SECRET,
