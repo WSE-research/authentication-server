@@ -28,7 +28,7 @@ export default async (req: any, res: any) => {
     ]
   );
 
-  const redirect_uri = `${req.protocol}://${req.get("host")}/generateToken`;
+  const redirect_uri = `https://${req.get("host")}/generateToken`;
 
   res.redirect(
     process.env["GITLAB_AUTHORIZE_URL"] +
